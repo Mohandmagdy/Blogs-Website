@@ -5,5 +5,12 @@
     "hapi": "^18.1.0",
     "mongoose": "^7.5.3",
     "nodemon": "^3.0.1"
+  },
+  "engines":{"node":"18.15.0"},
+  "name": "Blogs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
   }
 }
