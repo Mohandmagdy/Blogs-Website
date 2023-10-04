@@ -9,8 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/blogs')
+mongoose.connect('mongodb+srv://honda:baba@cluster0.ggicybj.mongodb.net/?retryWrites=true&w=majority')
     .then(result => {
+        console.log('connected');
         app.listen(3000);
     }).catch(err => {
         console.log(err);

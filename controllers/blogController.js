@@ -61,6 +61,16 @@ const edit = (req, res) => {
     }
 };
 
+const delete_blog = (req, res) => {
+    const id = req.params.id;
+    Blog.findByIdAndDelete(id)
+        .then(result => {
+            res.redirect('/');
+        }).catch(err => {
+            console.log(err);
+        })
+}
+
 module.exports = {
     view_blogs,
     search,
@@ -68,5 +78,6 @@ module.exports = {
     show_create,
     create_blog,
     get_edit,
-    edit
+    edit,
+    delete_blog
 }
