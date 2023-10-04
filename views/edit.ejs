@@ -1,0 +1,43 @@
+<%- include('./partials/header.ejs') %>
+
+<form>
+    <label for="name">Blog name</label>
+    <input type="text" name="name" value="<%-blog.name%>">
+    <label for="description">Blog description</label>
+    <input type="text" name="description" value="<%-blog.description%>">
+    <div class="description error"></div>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const descriptionError = document.querySelector('.description.error');
+
+    form.addEventListener('submit', async event => {
+        event.preventDefault();
+
+        descriptionError.textContent = '';
+        const myform = new FormData(event.target);
+        const values = Object.fromEntries(myform.entries());
+        const myBlog = <%- JSON.stringify(blog) %>;
+        
+        
+        const res = await fetch(`/blogs/edit/${myBlog._id}`, {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(values)
+        });
+        const data = await res.json();
+
+        if(data.description){
+            console.log(data.errors);
+            descriptionError.textContent = data.description;
+        }
+        else{
+            location.assign('/');
+        }
+    })
+</script>
+
+
+<%- include('./partials/footer.ejs') %>

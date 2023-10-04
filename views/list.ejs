@@ -1,0 +1,24 @@
+<%- include('./partials/header.ejs') %>
+
+<form action="/blogs/search" method="post">
+    <label for="name">Search by name</label>
+    <input type="text" name="name" required>
+    <button type="submit">Search</button>
+</form>
+
+<form action="/blogs/search" method="post">
+    <label for="category">Search by category</label>
+    <input type="text" name="category" required>
+    <button type="submit">Search</button>
+</form>
+
+<% blogs.forEach(blog => { %>
+    <a href="/blogs/<%- blog._id %>">
+        <h3>Title: <%- blog.name %></h3>
+        <h4>category: <%- blog.category %></h4><br>
+        <p>Description: <br><br> <%- blog.description %></p>
+    </a>
+    <br><hr><br>
+<% }) %>
+
+<%- include('./partials/footer.ejs') %>

@@ -1,0 +1,9 @@
+<%- include('./partials/header.ejs') %>
+
+<h2>Title: <%- blog.name %></h2><br>
+<h4>category: <%- blog.category %></h4><br>
+<h4>Description: <br><br> <%- blog.description %></h4>
+
+<button> <a href="/blogs/edit/<%-blog._id%>">Edit blog</a> </button>
+
+<%- include('./partials/footer.ejs') %>

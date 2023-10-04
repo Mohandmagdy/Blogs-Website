@@ -1,0 +1,48 @@
+<%- include('./partials/header.ejs') %>
+
+<form>
+    <label for="name">Blog name</label>
+    <input type="text" name="name" required>
+    <label for="description">Blog description</label>
+    <input type="text" name="description" required>
+    <div class="description error"></div>
+    <label for="category">Category</label>
+    <label for="romantic">Romantic</label>
+    <input type="radio" name="category" value="romantic" required>
+    <label for="adventure">Adventure</label>
+    <input type="radio" name="category" value="adventure" required>
+    <label for="comedy">Comedy</label>
+    <input type="radio" name="category" value="comedy" required>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const descriptionError = document.querySelector('.description.error');
+
+    form.addEventListener('submit', async event => {
+        event.preventDefault();
+
+        descriptionError.textContent = '';
+        const myform = new FormData(event.target);
+        const values = Object.fromEntries(myform.entries());
+        
+        const res = await fetch('/blogs/create', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(values)
+        });
+        const data = await res.json();
+
+        if(data.description){
+            console.log(data.errors);
+            descriptionError.textContent = data.description;
+        }
+        else{
+            location.assign('/');
+        }
+    })
+</script>
+
+<%- include('./partials/footer.ejs') %>
+
